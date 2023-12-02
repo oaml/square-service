@@ -27,13 +27,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+      <ProjectReference Include="..\SquareService.Infrastructure\SquareService.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SquareService.Infrastructure\SquareService.Infrastructure.csproj" />
+      <None Remove="Dockerfile" />
     </ItemGroup>
 
 </Project>
