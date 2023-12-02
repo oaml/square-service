@@ -11,9 +11,9 @@ To use this service, follow these steps:
 
 2. **Build the Docker Image**  
    Use the following command to build the Docker image: 
-```bash
-   docker build -t square-service .
-```
+	```bash
+    docker build -t square-service .
+	```
 
 3. **Run the Docker Container**
    After building the image, run the container using:
