@@ -14,9 +14,9 @@ public class PointListRepository : IPointListRepository
         _context = context;
     }
 
-    public async Task<int> InsertNewPointListAsync(IReadOnlyCollection<Point> points, CancellationToken ctx)
+    public async Task<int> InsertNewPointListAsync(IEnumerable<Point> points, CancellationToken ctx)
     {
-        var newPointList = new PointList(points);
+        var newPointList = new PointList(points.ToArray());
         _context.PointLists.Add(newPointList);
         await _context.SaveChangesAsync(ctx);
         return newPointList.PointListId;

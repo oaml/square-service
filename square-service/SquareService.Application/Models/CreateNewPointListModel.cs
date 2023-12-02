@@ -2,4 +2,4 @@
 
 namespace SquareService.Application.Models;
 
-public record CreateNewPointListModel(Point[] Points);
+public record CreateNewPointListModel(PointModel[] Points);

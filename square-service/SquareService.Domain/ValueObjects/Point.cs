@@ -14,8 +14,8 @@ public class Point : ValueObject
         X = x;
         Y = y;
     }
-    public int X { get;  set; }
-    public int Y { get;  set; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
     
     protected override IEnumerable<object> GetEqualityComponents()
     {

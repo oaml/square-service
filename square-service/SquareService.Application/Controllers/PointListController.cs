@@ -41,7 +41,7 @@ public class PointListController : ControllerBase
     {
         try
         {
-            var newPointListId = await _mediator.Send(new CreatePointListCommand(model.Points));
+            var newPointListId = await _mediator.Send(new CreatePointListCommand(model.Points.Select(p => p.ToDomainObject())));
             return CreatedAtAction(nameof(GetPointList), new { pointListId = newPointListId }, newPointListId);
         }
         catch (DuplicatePointException)
@@ -58,7 +58,7 @@ public class PointListController : ControllerBase
     {
         try
         {
-            await _mediator.Send(new AddPointInPointListCommand(pointListId, model.Point));
+            await _mediator.Send(new AddPointInPointListCommand(pointListId, model.Point.ToDomainObject()));
             return CreatedAtAction(nameof(GetPointList), new { pointListId = pointListId }, pointListId);
         }
         catch (KeyNotFoundException)
@@ -78,7 +78,7 @@ public class PointListController : ControllerBase
     {
         try
         {
-            await _mediator.Send(new DeletePointInPointListCommand(pointListId, model.Point));
+            await _mediator.Send(new DeletePointInPointListCommand(pointListId, model.Point.ToDomainObject()));
             return Ok();
         }
         catch (KeyNotFoundException)

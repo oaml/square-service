@@ -6,7 +6,7 @@ using SquareService.Domain.ValueObjects;
 
 namespace SquareService.Application.Commands;
 
-public record CreatePointListCommand(Point[] Points) : IRequest<int>
+public record CreatePointListCommand(IEnumerable<Point> Points) : IRequest<int>
 {
     public class Handler : IRequestHandler<CreatePointListCommand, int>
     {
