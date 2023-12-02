@@ -19,6 +19,11 @@ public class PointListController : ControllerBase
         _mediator = mediator;
     }
     
+    /// <summary>
+    /// Get PointList by Id. If PointList is not found will return 404.
+    /// </summary>
+    /// <param name="pointListId"></param>
+    /// <returns>PointList if found</returns>
     [HttpGet("{pointListId}")]
     [ProducesResponseType(StatusCodes.Status200OK)] 
     [ProducesResponseType(StatusCodes.Status404NotFound)] 
@@ -34,6 +39,11 @@ public class PointListController : ControllerBase
             return NotFound($"PointList with the provided Id: {pointListId} was not found");
         }
     }
+    /// <summary>
+    /// Create a new PointList. If any duplicate points are found will return 400.
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)] 
     [ProducesResponseType(StatusCodes.Status400BadRequest)] 
@@ -49,7 +59,12 @@ public class PointListController : ControllerBase
             return BadRequest("Points array contains duplicate points");
         }
     }
-    
+    /// <summary>
+    /// Add point to existing PointList. If PointList is not found will return 404. If a point with the same X, Y coordinates already exists in the PointList will return 400.
+    /// </summary>
+    /// <param name="pointListId"></param>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpPost("{pointListId}/point")]
     [ProducesResponseType(StatusCodes.Status201Created)] 
     [ProducesResponseType(StatusCodes.Status400BadRequest)] 
@@ -70,10 +85,16 @@ public class PointListController : ControllerBase
             return BadRequest($"Point with the provided (X, Y): ({model.Point.X}, {model.Point.Y}) already exists");
         }
     }
-    
+    /// <summary>
+    /// Delete existing point from a PointList. If PointList is not found will return 404. If the provided point doesn't exist will return 400.
+    /// </summary>
+    /// <param name="pointListId"></param>
+    /// <param name="model"></param>
+    /// <returns></returns>
     [HttpDelete("{pointListId}/point")]
     [ProducesResponseType(StatusCodes.Status200OK)] 
     [ProducesResponseType(StatusCodes.Status404NotFound)] 
+    [ProducesResponseType(StatusCodes.Status400BadRequest)] 
     public async Task<IActionResult> DeletePointFromExistingList([FromRoute]int pointListId, [FromBody] AddNewPointModel model)
     {
         try
@@ -87,10 +108,15 @@ public class PointListController : ControllerBase
         }
         catch (PointNotFoundException)
         {
-            return NotFound($"Point with the provided (X, Y): ({model.Point.X}, {model.Point.Y})  was not found");
+            return BadRequest($"Point with the provided (X, Y): ({model.Point.X}, {model.Point.Y})  was not found");
         }
     }
     
+    /// <summary>
+    /// Get a list of squares that exist in a given PointList. Will return 404 if PointList is not found.
+    /// </summary>
+    /// <param name="pointListId"></param>
+    /// <returns></returns>
     [HttpGet("{pointListId}/squares")]
     [ProducesResponseType(StatusCodes.Status200OK)] 
     [ProducesResponseType(StatusCodes.Status404NotFound)] 

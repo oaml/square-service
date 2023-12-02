@@ -41,7 +41,6 @@ public class SquareFindingServiceUnitTest
 
         Assert.Single(result);
     }
-
     
     [Fact]
     public async Task WithPointsFormingTwoSquares_ReturnsTwoSquares()
