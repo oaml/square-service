@@ -14,9 +14,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PointListContext>(options =>
     options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=YourDatabaseName;Trusted_Connection=True;"));
-builder.Services.AddScoped<ISquaringService, SquaringService>();
+builder.Services.AddScoped<ISquareFindingService, SquareFindingService>();
 builder.Services.AddScoped<IPointListRepository, PointListRepository>();
 builder.Services.AddMediatR(options => options.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddScoped<ISquareFindingService, SquareFindingService>();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())

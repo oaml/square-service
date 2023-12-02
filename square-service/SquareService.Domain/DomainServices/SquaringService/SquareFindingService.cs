@@ -3,7 +3,7 @@ using SquareService.Domain.ValueObjects;
 
 namespace SquareService.Domain.DomainServices.SquaringService;
 
-public class SquaringService : ISquaringService
+public class SquareFindingService : ISquareFindingService
 {
     public Task<IEnumerable<Square>> GetSquaresFromPointList(PointList pointList)
     {
@@ -53,7 +53,7 @@ public class SquaringService : ISquaringService
     {
         // Calculate the differences in x and y coordinates
         var dx = p2.X - p1.X; 
-        var dy = p2.Y - p1.Y;
+        var dy = p2.Y - p1.Y; 
         try
         {
             checked

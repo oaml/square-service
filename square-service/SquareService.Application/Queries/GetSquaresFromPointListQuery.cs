@@ -10,18 +10,18 @@ public record GetSquaresFromPointListQuery(int PointListId) : IRequest<IEnumerab
     public class Handler : IRequestHandler<GetSquaresFromPointListQuery, IEnumerable<Square>>
     {
         private readonly IPointListRepository _pointListRepository;
-        private readonly ISquaringService _squaringService;
+        private readonly ISquareFindingService _squareFindingService;
 
-        public Handler(IPointListRepository pointListRepository, ISquaringService squaringService)
+        public Handler(IPointListRepository pointListRepository, ISquareFindingService squareFindingService)
         {
             _pointListRepository = pointListRepository;
-            _squaringService = squaringService;
+            _squareFindingService = squareFindingService;
         }
 
         public async Task<IEnumerable<Square>> Handle(GetSquaresFromPointListQuery query, CancellationToken cancellationToken)
         {
             var pointList = await _pointListRepository.GetPointListAsync(query.PointListId, cancellationToken);
-            return await _squaringService.GetSquaresFromPointList(pointList);
+            return await _squareFindingService.GetSquaresFromPointList(pointList);
         }
     }
 }
