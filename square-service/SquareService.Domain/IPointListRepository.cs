@@ -1,10 +1,12 @@
-﻿using SquareService.Domain.ValueObjects;
+﻿using SquareService.Domain.Aggregates.PointList;
+using SquareService.Domain.ValueObjects;
 
 namespace SquareService.Domain;
 
 public interface IPointListRepository
 {
-    public Task<int> InsertNewPointListAsync(IEnumerable<Point> points);
-    public Task AddPointToList(int pointListId, Point point);
-    public Task RemovePointFromList(int pointListId, Point point);
+    public Task<int> InsertNewPointListAsync(IReadOnlyCollection<Point> points, CancellationToken ctx = default);
+    public Task<PointList> GetPointListAsync(int pointListId, CancellationToken ctx = default);
+    public Task AddPointToListAsync(int pointListId, Point point, CancellationToken ctx = default);
+    public Task RemovePointFromListAsync(int pointListId, Point point, CancellationToken ctx = default);
 }

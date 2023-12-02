@@ -1,4 +1,4 @@
-﻿using SquareService.Domain.Aggregates.PointList;
+﻿// ReSharper disable NonReadonlyMemberInGetHashCode
 
 namespace SquareService.Domain.ValueObjects;
 
@@ -14,8 +14,9 @@ public class Point : ValueObject
         X = x;
         Y = y;
     }
-    public int X { get; private set; }
-    public int Y { get; private set; }
+    public int X { get;  set; }
+    public int Y { get;  set; }
+    
     protected override IEnumerable<object> GetEqualityComponents()
     {
         yield return X;
